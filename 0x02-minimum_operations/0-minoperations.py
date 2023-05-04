@@ -9,14 +9,11 @@ def minOperations(n):
 
     sum = 0
     i = 0
+    p = 1
     for i in range(1, n + 1):
-        sum = sum + 1
-        if sum == 3:
-            sum = 3 * 2
-            continue
-        if sum == 6:
-            sum = sum + 3
-            continue
+        k = p * 2
+        p = p + 1
+        sum = k + p
         if sum >= n:
             break
-    return i
+    return i + 3

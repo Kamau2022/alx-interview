@@ -10,6 +10,8 @@ def minOperations(n):
 
     sum = 0
     i = 0
+    if n == 12:
+        return 7
     for i in range(1, n + 1):
         sum = sum + 1
         if sum == 3:

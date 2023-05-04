@@ -1,7 +1,6 @@
 #!/usr/bin/python3
 """technical interview
 """
-import sys
 
 
 def minOperations(n):
@@ -9,6 +8,7 @@ def minOperations(n):
     """
 
     sum = 0
+    i = 0
     for i in range(1, n + 1):
         sum = sum + 1
         if sum == 3:

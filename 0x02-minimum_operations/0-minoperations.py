@@ -9,8 +9,6 @@ def minOperations(n):
 
     sum = 1
     i = 0
-    if n == 9:
-        return 6
     for i in range(1, n + 1):
         sum = sum + 2
         if sum == 9:

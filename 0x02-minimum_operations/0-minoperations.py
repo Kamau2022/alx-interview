@@ -7,7 +7,7 @@ import math
 def minOperations(n):
     """ a function to find minimum operations on a number
     """
-    if n is None or n < 2:
+    if n is not int:
         return 0
     prime_factors = []
     sum = 0

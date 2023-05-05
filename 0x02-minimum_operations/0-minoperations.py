@@ -7,7 +7,7 @@ import math
 def minOperations(n):
     """ a function to find minimum operations on a number
     """
-    if type(n) != int:
+    if type(n) != int or n <= 1:
         return 0
     numbers = []
     sum = 0

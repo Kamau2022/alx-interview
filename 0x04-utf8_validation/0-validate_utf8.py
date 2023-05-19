@@ -1,28 +1,43 @@
 #!/usr/bin/python3
 """technical-interview
 """
+NUMBER_OF_BITS_PER_BYTE = 8
+MAX_NUMBER_OF_ONES = 4
 
 
 def validUTF8(data):
     """a function to validate a given data set
        represents a valid UTF-8 encoding.
     """
-    n_bytes = 0
-    mask1 = 1 << 7
-    mask2 = 1 << 6
-    for num in data:
-        mask = 1 << 7
-        if n_bytes == 0:
-            while mask & num:
-                n_bytes += 1
-                mask = mask >> 1
-            if n_bytes == 0:
-                continue
-            if n_bytes == 1 or n_bytes > 4:
+    index = 0
+    while index < len(data):
+        number = data[index] & (2 ** 7)
+        number >>= (NUMBER_OF_BITS_PER_BYTE - 1)
+        if number == 0:
+            index += 1
+            continue
+        number_of_ones = 0
+        while True:
+            number = data[index] & (2 ** (7 - number_of_ones))
+            number >>= (NUMBER_OF_BITS_PER_BYTE - number_of_ones - 1)
+            if number == 1:
+                number_of_ones += 1
+            else:
+                break
+            if number_of_ones > MAX_NUMBER_OF_ONES:
                 return False
-        else:
-            if not (num & mask1 or (num & mask2)):
-                return True
-            n_bytes -= 1
-        return n_bytes == 0
+        if number_of_ones == 1:
+            return False
+        index += 1
+        if index >= len(data) or index >= (index + number_of_ones - 1):
+            return False
+        for i in range(index, index + number_of_ones - 1):
+            number = data[i]
+            number >>= (NUMBER_OF_BITS_PER_BYTE - 1)
+            if number != 1:
+                return False
+            number >>= (NUMBER_OF_BITS_PER_BYTE - 1)
+            if number != 0:
+                return False
+            index += 1
     return True
